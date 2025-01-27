@@ -4,20 +4,20 @@ const next = require("next");
 const fs = require("fs");
 const zlib = require("zlib");
 const { join } = require("path");
-const { processHTMLFile } = require("./critters");
+const { processHTMLFile } = require("./beasties");
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = dev ? "localhost" : "example.com";
 const port = 3000;
 const app = next({ dev, port, hostname });
 const handle = app.getRequestHandler();
-const DIR = "critters";
+const DIR = "beasties";
 let processedRoutes = new Set();
 const routes = {};
 const cachingTime = 5 * 60 * 1000; // 5 min
 
 try {
-  console.time("Critters: runtime prepare");
+  console.time("Beasties: runtime prepare");
 
   fs.rmSync(DIR, { recursive: true, force: true });
 
@@ -40,7 +40,7 @@ try {
 
   JSON.parse(processedHTMLFiles).forEach((file) => processedRoutes.add(file));
 
-  console.timeEnd("Critters: runtime prepare");
+  console.timeEnd("Beasties: runtime prepare");
 } catch (error) {}
 
 async function saveStylesToFile(html, path) {
@@ -58,7 +58,7 @@ async function saveStylesToFile(html, path) {
       console.log("styles saved to file:", filePath);
     }
   });
-  console.timeEnd("Critters: runtime");
+  console.timeEnd("Beasties: runtime");
 }
 
 app.prepare().then(() => {
@@ -92,7 +92,7 @@ app.prepare().then(() => {
           processedRoutes.add(pathname);
 
           setTimeout(() => {
-            console.time("Critters: runtime");
+            console.time("Beasties: runtime");
 
             const html = Buffer.concat(chunks);
 

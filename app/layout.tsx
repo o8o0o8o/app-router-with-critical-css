@@ -32,7 +32,7 @@ function getCriticalCSS(page: string | null) {
       <style
         dangerouslySetInnerHTML={{
           __html: fs.readFileSync(
-            join(process.cwd(), "critters", withoutQuery, "styles.css"),
+            join(process.cwd(), "beasties", withoutQuery, "styles.css"),
             "utf-8"
           ),
         }}
@@ -56,7 +56,7 @@ export default function RootLayout({
   const headersList = headers();
   const pathName = headersList.get("x-pathname");
   const criticalCSS = getCriticalCSS(pathName);
-  const isCriticalCSSMode = process.env.CRITTERS_RUNTIME && criticalCSS;
+  const isCriticalCSSMode = process.env.BEASTIES_RUNTIME && criticalCSS;
 
   return (
     <html lang="en">
